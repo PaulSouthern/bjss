@@ -1,9 +1,9 @@
 class Login
 
-  USERNAME_INPUT = { id: 'username' }
-  PASSWORD_INPUT = { id: 'password' }
-  SUBMIT_BUTTON = { css: 'button' }
-  SUCCESS_MESSAGE = { css: '.flash.success' }
+  LOGIN_BUTTON = { class: 'login' }
+  EMAIL_INPUT = { id: 'email' }
+  PASSWORD_INPUT = { id: 'passwd' }
+  SUBMIT_BUTTON = { id: 'SubmitLogin' }
 
   def initialize(driver)
     @driver = driver
@@ -11,12 +11,10 @@ class Login
   end
 
   def with(username, password)
-    @driver.find_element(USERNAME_INPUT).send_keys(username)
+    # Sign In
+    @driver.find_element(LOGIN_BUTTON).click
+    @driver.find_element(EMAIL_INPUT).send_keys(username)
     @driver.find_element(PASSWORD_INPUT).send_keys(password)
     @driver.find_element(SUBMIT_BUTTON).click
-  end
-
-  def success_message_present?
-    @driver.find_element(SUCCESS_MESSAGE).displayed?
   end
 end
