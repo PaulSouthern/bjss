@@ -1,33 +1,8 @@
-require 'selenium-webdriver'
-require 'pry'
-require 'rspec'
-
-require_relative '../helpers/helpers'
-require_relative '../page_objects/login'
-require_relative '../page_objects/add_item'
-require_relative '../page_objects/cart'
-require_relative '../page_objects/navigation'
-require_relative '../page_objects/checkout'
-
-
 describe 'Test 1: Happy Path' do
-  # before(:each) do
-  #   @driver = Selenium::WebDriver.for :firefox
-  #   @login = Login.new(@driver)
-  #   @add_item = AddItem.new(@driver)
-  #   @cart = Cart.new(@driver)
-  #   @navigation = Navigation.new(@driver)
-  #   @checkout = Checkout.new(@driver)
-  # end
-
-  after(:each) do
-    @driver.quit
-  end
-
   it 'Purchases 2 items' do
     # Sign In
     @driver.manage.window.maximize
-    @login.with('pstestaccount180918@mail.com','testing')
+    @login.with('pstestaccount180918@mail.com','BJSSTest')
     @navigation.home
 
     # Add item one

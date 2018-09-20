@@ -14,6 +14,10 @@ class AddItem
     wait(10).until { @driver.find_element(id: 'group_1').displayed? }
   end
 
+  def item_name
+    @driver.find_element(css: "h1[itemprop=name]")
+  end
+
   def select_size(size)
     @driver.find_element(id: 'group_1').find_element(css: "option[title=#{size}]")
   end

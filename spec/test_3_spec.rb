@@ -1,4 +1,4 @@
-describe 'Test 2: Review Previous Orders' do
+describe 'Test 3: Capture Images' do
   it 'Add Message to Previous Order' do
     # Sign In
     @login.with('pstestaccount180918@mail.com','BJSSTest')
@@ -12,8 +12,13 @@ describe 'Test 2: Review Previous Orders' do
     @review_orders.send_message.click
     wait(3).until { @driver.find_element(class: 'alert-success').displayed? }
 
-    # Expectations
-    expect(@driver.find_element(class: 'alert-success').displayed?).to be_truthy
+    # Failed Expectations
+    begin
+      expect(@driver.find_element(class: 'alert-success').displayed?).to be_falsey
+    rescue RSpec::Expectations::ExpectationNotMetError => error
+      puts error.message
+      @driver.save_screenshot "./tmp/failures/#{Time.now.strftime("failshot__%d_%m_%Y__%H_%M_%S")}.png"
+    end
 
     # Logout
     @navigation.logout.click
