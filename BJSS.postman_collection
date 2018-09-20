@@ -1,0 +1,570 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BJSS",
+		"_postman_id": "17be1971-eb45-955b-c354-d3bc12c6cdd9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Page Returned\"] = jsonData.page === 2;",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "/api/users?page=2"
+			},
+			"response": []
+		},
+		{
+			"name": "Single User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"User Id\"] = jsonData.data.id === 2;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://reqres.in/api/users/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Single User Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"User Not Found\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://reqres.in/api/users/23",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "https://reqres.in/api/users/23"
+			},
+			"response": []
+		},
+		{
+			"name": "List Resources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Resources Greater than 1\"] = jsonData.data.length > 1;",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://reqres.in/api/unknown",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Single Resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Resource Id\"] = jsonData.data.id === 2;",
+							"tests[\"Single Resource Returned\"] = jsonData.data.length = 1;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://reqres.in/api/unknown/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Single Resource Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Resource Not Found\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://reqres.in/api/unknown/23",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"ID Node Not Empty\"] = jsonData.id !== '';",
+							"tests[\"Created At Node Not Empty\"] = jsonData.createdAt !== '';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://reqres.in/api/users",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "morpheus",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "job",
+							"value": "leader",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update (PUT)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Updated At Not Empty\"] = jsonData.updatedAt !== '';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/users/2?name=morpheus&job=zion resident",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "morpheus",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "job",
+							"value": "zion resident",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update (PATCH)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Updated At Not Empty\"] = jsonData.updatedAt !== '';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/users/2?name=morpheus&job=zion resident",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "morpheus",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "job",
+							"value": "zion resident",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://reqres.in/api/users/2",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Register Successful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token Node Not Empty\"] = jsonData.token !== '';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/register?email=sydney@fife&password=pistol",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"register"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "sydney@fife",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "pistol",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": "Note - An error was returned that did not meet the API documentation."
+			},
+			"response": []
+		},
+		{
+			"name": "Register Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/register?email=sydney@fife",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"register"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "sydney@fife",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Login Successful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/login?email=peter@klaven&password=cityslicka",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "peter@klaven",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "cityslicka",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": "Note - Error does not match the API documentation\n\n{\n    \"error\": \"Missing email or username\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Login Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/login?email=peter@klaven",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "peter@klaven",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delayed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Total Pages\"] = jsonData.total_pages === 4;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://reqres.in/api/users?delay=3",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "delay",
+							"value": "3",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
