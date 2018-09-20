@@ -1,6 +1,9 @@
 # BJSS
 
-This repository contains the Technical Test specs and page objects as required
+This repository contains the Technical Test specs and page objects as required.
+
+- Tests 1 - 3: Selenium Webdriver specs using Ruby bindings.  Tests running on Firefox browser (GeckoDriver)
+- Test 4: API tests written using Postman.  Collection included in repo `./BJSS.postman_collection`
 
 <br />
 
