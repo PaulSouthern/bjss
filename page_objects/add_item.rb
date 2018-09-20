@@ -4,8 +4,14 @@ class AddItem
     @driver = driver
   end
 
-  def item(item)
-    @driver.find_element(class: item)
+  def view_item(item)
+    @driver.find_element(class: item).click
+  end
+
+  def quick_view_item(item)
+    @driver.action.move_to(view_item(item)).perform
+    @driver.find_element(class: 'quick-view').click
+    wait(10).until { @driver.find_element(id: 'group_1').displayed? }
   end
 
   def select_size(size)

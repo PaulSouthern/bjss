@@ -1,2 +1,4 @@
+--require spec_helper
+--format document
 --format html
 --out tmp/html_results/selenium_results.html

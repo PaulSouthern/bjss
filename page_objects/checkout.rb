@@ -1,3 +1,6 @@
+require 'selenium-webdriver'
+require 'rspec'
+
 class Checkout
 
   def initialize(driver)

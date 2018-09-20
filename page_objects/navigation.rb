@@ -5,7 +5,8 @@ class Navigation
   end
 
   def home
-    @driver.find_element(class: 'home')
+    @driver.find_element(class: 'home').click
+    wait(3).until { @driver.find_element(class: 'columns-container').displayed? }
   end
 
   def scroll_to_top

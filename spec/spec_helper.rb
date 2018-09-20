@@ -30,6 +30,11 @@ require_relative '../helpers/helpers'
 RSpec.configure do |config|
   config.before(:each) do
     @driver = Selenium::WebDriver.for :firefox
+    @login = Login.new(@driver)
+    @add_item = AddItem.new(@driver)
+    @cart = Cart.new(@driver)
+    @navigation = Navigation.new(@driver)
+    @checkout = Checkout.new(@driver)
   end
 
   config.after(:each) do
